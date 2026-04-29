@@ -20,7 +20,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
+                    bat 'echo|set /p=%DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
                 }
             }
         }
@@ -34,10 +34,10 @@ pipeline {
 
     post {
         success {
-            echo 'Image successfully built and pushed to Docker Hub'
+            echo '✅ Image successfully built and pushed to Docker Hub'
         }
         failure {
-            echo 'Pipeline failed'
+            echo '❌ Pipeline failed'
         }
     }
 }
